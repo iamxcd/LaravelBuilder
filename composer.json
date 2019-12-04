@@ -1,0 +1,28 @@
+{
+    "name": "songbai/laravel-builder",
+    "description": "laravel 代码生成",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "laravel/framework": ">=5.5.0"
+    },
+    "license": "mit",
+    "authors": [
+        {
+            "name": "xian",
+            "email": "songbai_x@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SongBai\\LaravelBuilder\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SongBai\\LaravelBuilder\\Providers\\LaravelBuilderServiceProvider"
+            ]
+        }
+    }
+}

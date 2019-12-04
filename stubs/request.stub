@@ -1,0 +1,65 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class DummyClass extends FormRequest
+{
+    /**
+     * 用户是否有权限请求
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * 精确到控制器方法的验证
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        switch (request()->route()->getActionMethod()) {
+            case 'store' :
+                return $this->storeRule();
+                break;
+            case 'update' :
+                return $this->updateRule();
+                break;
+            default:
+                return [];
+                break;
+        }
+    }
+
+    private function storeRule()
+    {
+        $rule = [
+
+        ];
+
+        return $rule;
+    }
+
+    private function updateRule()
+    {
+        $rule = [
+
+        ];
+
+        return $rule;
+    }
+
+    public function attributes()
+    {
+        return [
+
+        ];
+    }
+
+    // 常用验证方法 https://learnku.com/docs/laravel/5.8/validation/3899#rule-accepted
+}
