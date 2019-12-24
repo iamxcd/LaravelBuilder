@@ -17,6 +17,7 @@ class LaravelBuilderServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+        $this->publishStubs();
     }
 
     protected function registerConfig()
@@ -33,12 +34,27 @@ class LaravelBuilderServiceProvider extends ServiceProvider
         $this->publishes($paths);
     }
 
+    protected function publishStubs()
+    {
+        $path = __DIR__ . '/../../stubs/';
+        $files = scandir($path);
+        $paths = [];
+        foreach ($files as $key => $name) {
+            if ($name == '.' || $name == '..') {
+                continue;
+            }
+            $paths[$path . $name] = resource_path('stubs/' . $name);
+        }
+        $this->publishes($paths);
+    }
+
     protected function loadCommands()
     {
         $this->commands([
             \SongBai\LaravelBuilder\Commands\LbCommand::class,
             \SongBai\LaravelBuilder\Commands\RequestCommand::class,
             \SongBai\LaravelBuilder\Commands\TableToModelCommand::class,
+            \SongBai\LaravelBuilder\Commands\ControllerCommand::class,
         ]);
     }
 }

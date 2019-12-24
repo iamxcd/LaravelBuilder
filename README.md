@@ -12,6 +12,7 @@ composer require songbai/laravel-builder --save
 php artisan lb // 选择使用功能
 php artisan lb:request // 验证器
 php artisan lb:t2m //已有表格生成模型
+php artisan lb:controller // 生成控制器
 ```
 
 ### 功能
@@ -21,9 +22,11 @@ php artisan lb:t2m //已有表格生成模型
 - [ ] 模型
 - [ ] 资源控制器
 
-### 自定义模板
+### 自定义模板 发布配置
 
 ```
+// 发布配置
+php artisan vendor:publish --provider="SongBai\LaravelBuilder\Providers\LaravelBuilderServiceProvider"
 <?php
 // 将需要自定义的模板复制一份 stub-path 指定的目录
 

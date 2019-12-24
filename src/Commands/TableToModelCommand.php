@@ -18,7 +18,7 @@ class TableToModelCommand extends GeneratorCommand
 
     protected $menu = [
         '创建表单验证' => 'lb:request',
-        '控制器' => 'make:controller'
+        '控制器' => 'lb:controller'
     ];
 
     protected function getNameInput()

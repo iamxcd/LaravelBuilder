@@ -3,18 +3,18 @@
 namespace SongBai\LaravelBuilder\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputArgument;
 
-class RequestCommand extends GeneratorCommand
+class ControllerCommand extends GeneratorCommand
 {
 
 
-    protected $name = 'lb:request';
+    protected $name = 'lb:controller';
 
-    protected $description = '创建一个请求验证器';
-    protected $type = 'Request';
+    protected $description = '控制器';
+    protected $type = 'Controller';
     protected $className = null;
-
 
     protected function getNameInput()
     {
@@ -24,16 +24,17 @@ class RequestCommand extends GeneratorCommand
         }
         if (is_null($this->className)) {
             do {
-                $this->className = $this->ask('请输入表单验证名称 不加后缀');
+                $this->className = $this->ask('请输入控制器名称 不加后缀');
             } while ($this->className == null || $this->className == '');
         }
 
         return ucfirst($this->className) . $this->type; // 首字母大写 再加后缀
     }
 
+
     protected function getStub()
     {
-        $stub = 'request.stub';
+        $stub = 'controller.stub';
         $filePath = config('laravel-builder.stub-path') . '/' . $stub;
 
         if (!file_exists($filePath)) {
@@ -50,7 +51,7 @@ class RequestCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Http\Requests';
+        return $rootNamespace . '\Http\Controllers';
     }
 
     /**
