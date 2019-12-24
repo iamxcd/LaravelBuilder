@@ -17,7 +17,8 @@ class LbCommand extends Command
         parent::__construct();
 
         $this->menu = [
-            '表单验证' => 'lb:request'
+            '创建表单验证' => 'lb:request',
+            '已有表生成模型' => 'lb:t2m'
         ];
     }
 

@@ -18,13 +18,17 @@ class RequestCommand extends GeneratorCommand
 
     protected function getNameInput()
     {
+        $className = trim($this->argument('name'));
+        if ($className != "") {
+            $this->className = $className;
+        }
         if (is_null($this->className)) {
             do {
                 $this->className = $this->ask('请输入表单验证类名');
             } while ($this->className == null || $this->className == '');
         }
 
-        return $this->className;
+        return ucfirst($this->className) . $this->type; // 首字母大写 再加后缀
     }
 
     protected function getStub()
@@ -89,6 +93,8 @@ class RequestCommand extends GeneratorCommand
      */
     protected function getArguments()
     {
-        return [];
+        return [
+            ['name', InputArgument::OPTIONAL, '类名 不用加后缀']
+        ];
     }
 }

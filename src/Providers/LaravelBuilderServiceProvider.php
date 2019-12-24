@@ -38,6 +38,7 @@ class LaravelBuilderServiceProvider extends ServiceProvider
         $this->commands([
             \SongBai\LaravelBuilder\Commands\LbCommand::class,
             \SongBai\LaravelBuilder\Commands\RequestCommand::class,
+            \SongBai\LaravelBuilder\Commands\TableToModelCommand::class,
         ]);
     }
 }

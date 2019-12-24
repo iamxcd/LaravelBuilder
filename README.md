@@ -9,11 +9,14 @@ composer require songbai/laravel-builder --save
 
 ### 使用
 ```
-php artisan lb
+php artisan lb // 选择使用功能
+php artisan lb:request // 验证器
+php artisan lb:t2m //已有表格生成模型
 ```
 
 ### 功能
 - [x] 表单验证 
+- [x] 已有表格批量生成模型、控制器、验证器
 - [ ] 控制器 
 - [ ] 模型
 - [ ] 资源控制器
