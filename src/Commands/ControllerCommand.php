@@ -3,6 +3,7 @@
 namespace SongBai\LaravelBuilder\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -27,8 +28,8 @@ class ControllerCommand extends GeneratorCommand
                 $this->className = $this->ask('请输入控制器名称 不加后缀');
             } while ($this->className == null || $this->className == '');
         }
-
-        return ucfirst($this->className) . $this->type; // 首字母大写 再加后缀
+        $this->className = ucfirst($this->className);
+        return $this->className . $this->type; // 首字母大写 再加后缀
     }
 
 
@@ -36,7 +37,6 @@ class ControllerCommand extends GeneratorCommand
     {
         $stub = 'controller.stub';
         $filePath = config('laravel-builder.stub-path') . '/' . $stub;
-
         if (!file_exists($filePath)) {
             $filePath = __DIR__ . '/../../stubs/' . $stub;
         }
@@ -67,12 +67,18 @@ class ControllerCommand extends GeneratorCommand
          * 将模板中的替换
          */
         $stub = str_replace(
-            ['DummyNamespace'],
-            [$this->getNamespace($name)],
+            ['DummyNamespace', 'DummyModelClass'],
+            [$this->getNamespace($name), $this->getModelClass()],
             $stub
         );
 
         return $this;
+    }
+
+    protected function getModelClass()
+    {
+        $modelNamespace = $this->rootNamespace() . 'Models';
+        return $modelNamespace . '\\' . $this->className;
     }
 
     /**
@@ -84,8 +90,8 @@ class ControllerCommand extends GeneratorCommand
     protected function replaceClass($stub, $name)
     {
         $class = str_replace($this->getNamespace($name) . '\\', '', $name);
-
-        return str_replace('DummyClass', $class, $stub);
+        $stub = str_replace('DummyClass', $class, $stub);
+        return $stub;
     }
 
     /**

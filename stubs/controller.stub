@@ -2,6 +2,14 @@
 
 namespace DummyNamespace;
 
+use DummyModelClass as Model;
+
 class DummyClass extends Controller
 {
+    protected $model;
+
+    public function __construct(Model $model)
+    {
+        $this->model = $model;
+    }
 }

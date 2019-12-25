@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'stub-path' => resource_path('stub')
+    'stub-path' => resource_path('stubs')
 ];
