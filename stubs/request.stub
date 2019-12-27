@@ -39,7 +39,7 @@ class DummyClass extends FormRequest
     private function storeRule()
     {
         $rule = [
-
+        #DummyRule
         ];
 
         return $rule;
@@ -48,7 +48,7 @@ class DummyClass extends FormRequest
     private function updateRule()
     {
         $rule = [
-
+        #DummyRule
         ];
 
         return $rule;
@@ -57,7 +57,7 @@ class DummyClass extends FormRequest
     public function attributes()
     {
         return [
-
+        #DummyAttr
         ];
     }
 

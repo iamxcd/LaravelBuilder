@@ -3,6 +3,7 @@
 namespace SongBai\LaravelBuilder\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputArgument;
 
 class RequestCommand extends GeneratorCommand
@@ -14,7 +15,6 @@ class RequestCommand extends GeneratorCommand
     protected $description = '创建一个请求验证器';
     protected $type = 'Request';
     protected $className = null;
-
 
     protected function getNameInput()
     {
@@ -94,7 +94,38 @@ class RequestCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::OPTIONAL, '类名 不用加后缀']
+            ['name', InputArgument::OPTIONAL, '类名 不用加后缀'],
+            ['table', InputArgument::OPTIONAL, '表名，用于生成验证规则']
         ];
+    }
+
+    protected function buildClass($name)
+    {
+        $stub = $this->files->get($this->getStub());
+
+        return $this->replaceNamespace($stub, $name)->setRule($stub)->replaceClass($stub, $name);
+    }
+
+    public function setRule(&$stub)
+    {
+        $tableName = $this->argument('table');
+        if ($tableName) {
+            $columns = DB::connection()->getDoctrineSchemaManager()->listTableColumns($tableName);
+            $rule = '';
+            $attr = '';
+            foreach ($columns as $column) {
+                $type = $column->getType()->getName();
+                $info = $column->toArray();
+                $rule .= "'" . $info['name'] . "'=>'" . $type . "'," . PHP_EOL;
+                $attr .= "'" . $info['name'] . "'=>'" . $info['comment'] . "'," . PHP_EOL;
+            }
+
+            $stub = str_replace(
+                ['#DummyRule', '#DummyAttr'],
+                [$rule, $attr],
+                $stub
+            );
+        }
+        return $this;
     }
 }
