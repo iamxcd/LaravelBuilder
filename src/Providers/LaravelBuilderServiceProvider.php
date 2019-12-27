@@ -55,6 +55,7 @@ class LaravelBuilderServiceProvider extends ServiceProvider
             \SongBai\LaravelBuilder\Commands\RequestCommand::class,
             \SongBai\LaravelBuilder\Commands\TableToModelCommand::class,
             \SongBai\LaravelBuilder\Commands\ControllerCommand::class,
+            \SongBai\LaravelBuilder\Commands\getColumnInfoCommand::class,
         ]);
     }
 }

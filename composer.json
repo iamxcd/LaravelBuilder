@@ -4,7 +4,8 @@
     "type": "library",
     "require": {
         "php": ">=7.0",
-        "laravel/framework": ">=5.5.0"
+        "laravel/framework": ">=5.5.0",
+        "doctrine/dbal": "^2.10"
     },
     "license": "mit",
     "authors": [
