@@ -54,6 +54,11 @@ class ControllerCommand extends GeneratorCommand
         return $rootNamespace . '\Http\Controllers';
     }
 
+    protected function getDefaultRequestNamespace()
+    {
+        return 'App\Http\Requests';
+    }
+
     /**
      * @param string $stub
      * @param string $name
@@ -67,8 +72,8 @@ class ControllerCommand extends GeneratorCommand
          * 将模板中的替换
          */
         $stub = str_replace(
-            ['DummyNamespace', 'DummyModelClass'],
-            [$this->getNamespace($name), $this->getModelClass()],
+            ['DummyNamespace', 'DummyModelClass','RequestDummy','RequestNamespace'],
+            [$this->getNamespace($name), $this->getModelClass(),$this->className . 'Request',$this->getDefaultRequestNamespace().'\\'. $this->className . 'Request'],
             $stub
         );
 

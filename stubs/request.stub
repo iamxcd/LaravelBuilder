@@ -23,17 +23,13 @@ class DummyClass extends FormRequest
      */
     public function rules()
     {
-        switch (request()->route()->getActionMethod()) {
-            case 'store' :
-                return $this->storeRule();
-                break;
-            case 'update' :
-                return $this->updateRule();
-                break;
-            default:
-                return [];
-                break;
+        $actionMethod = request()->route()->getActionMethod();
+        $ruleMethod = $actionMethod . 'Rule';
+        if (method_exists($this, $ruleMethod)) {
+            return $this->{$ruleMethod}();
         }
+        
+        return [];
     }
 
     private function storeRule()

@@ -4,7 +4,7 @@
 
 ### 安装
 ```
-composer require songbai/laravel-builder --save
+composer require iamxcd/laravel-builder --dev
 ```
 
 ### 使用
@@ -19,10 +19,8 @@ php artisan lb:getColumn {name?} //  获取字段信息
 ### 功能
 - [x] 表单验证 
 - [x] 已有表格批量生成模型、控制器、验证器
-- [ ] 控制器 
-- [ ] 模型
-- [ ] 资源控制器
-- [ ] 根据表结构 大致生成验证规则
+- [x] 控制器
+- [x] 根据表结构 大致生成验证规则
 
 ### 自定义模板 发布配置
 

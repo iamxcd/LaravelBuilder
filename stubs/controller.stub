@@ -3,13 +3,13 @@
 namespace DummyNamespace;
 
 use DummyModelClass as Model;
+use RequestNamespace;
 
 class DummyClass extends Controller
 {
-    protected $model;
-
     public function __construct(Model $model)
     {
         $this->model = $model;
+        $this->request = RequestDummy::class;
     }
 }
