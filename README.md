@@ -4,7 +4,7 @@
 
 ### 安装
 ```
-composer require iamxcd/laravel-builder --dev
+composer require songbai/laravel-builder --dev
 ```
 
 ### 使用
