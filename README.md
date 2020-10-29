@@ -35,36 +35,31 @@ return [
 ];
 ```
 
-###  获取表结构 字段信息
+### 最佳体验
 
-    配置回调 config('laravel-builder.getColumn.columnInfoHandle');
+需要配合另一个扩展包，导入增删改查功能。
 
-````
+将模板发布后，调整到适合自己的项目。
 
-config/laravel-builder.php
-<?php
+#### 根据功能模块建立模型的迁移
+```bash
+php artisan make:model user -m
+```
 
-return [
-    'stub-path' => resource_path('stubs'),
-    'getColumn' => [
-        // 自定义处理回调
-        'columnInfoHandle' => function (\Doctrine\DBAL\Schema\Column $column) {
-            $info = $column->toArray();
-            echo "{label:'$info[comment]',prop:'$info[name]'}," . PHP_EOL;
-        }
-    ]
-];
+注意：迁移文件每个字段记得加上备注。
+
+#### 生成控制器和验证规则。
+
+```bash
+php artisan lb // 根据提示 填写模块名 不用加controller
+
+php artisan lb:request user users // 生成验证规则文件，参数1 模块名 参数2 表名
+// 以上将根据字段类型 为store,update 方法生成默认的验证规则。
+// 控制器如有其他方法需要验证，新增一个 方法名+Rule的方法即可。
+```
+
+#### 创建路由
+给刚添加的模块创建一个apiResource路由。
 
 
-
-getColumnInfoCommand.php
-
-...
-$columnInfoHandle = config('laravel-builder.getColumn.columnInfoHandle');
-if (is_callable($columnInfoHandle)) {
-    $columnInfoHandle($column);
-} else {
-    $this->info('未设置表结构处理函数。设置方式见readme.md');
-}
-...
-````
+通过以上几个步骤，即可完成一个简单的增删改查接口。如有调整，重写该方法即可。
