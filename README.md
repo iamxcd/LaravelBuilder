@@ -14,6 +14,7 @@ php artisan lb:request // 验证器
 php artisan lb:t2m //已有表格生成模型
 php artisan lb:controller // 生成控制器
 php artisan lb:getColumn {name?} //  获取字段信息
+php artisan lb:CreateDicFile // 创建字典文件
 ```
 
 ### 功能
@@ -21,6 +22,7 @@ php artisan lb:getColumn {name?} //  获取字段信息
 - [x] 已有表格批量生成模型、控制器、验证器
 - [x] 控制器
 - [x] 根据表结构 大致生成验证规则
+- [x] 创建字典文件
 
 ### 自定义模板 发布配置
 
@@ -34,6 +36,61 @@ return [
     'stub-path' => resource_path('stub')
 ];
 ```
+
+### 创建字典文件
+php artisan lb:CreateDicFile // 将会扫描Models下所有模型中 包含这两个@group @label注解的常量.通过反射,组装成类似 [value=>'值', label=>'标签'] 的结果
+
+```
+    /**
+     * @group STATUS
+     * @label 未执行
+     */
+    const STATUS_DEFAULT = 0;
+
+    /**
+     * @group STATUS
+     * @label 待执行
+     */
+    const STATUS_AWAIT = 10;
+
+    /**
+     * @group STATUS
+     * @label 执行成功
+     */
+    const STATUS_SUCCESS = 20;
+
+    /**
+     * @group STATUS
+     * @label 执行失败
+     */
+    const STATUS_FAIL = -10;
+```
+生成如下文件
+```
+      'STATUS' => 
+      array (
+        0 => 
+        array (
+          'value' => 0,
+          'label' => '未执行',
+        ),
+        1 => 
+        array (
+          'value' => 10,
+          'label' => '待执行',
+        ),
+        2 => 
+        array (
+          'value' => 20,
+          'label' => '执行成功',
+        ),
+        3 => 
+        array (
+          'value' => -10,
+          'label' => '执行失败',
+        ),
+```
+
 
 ### 最佳体验
 
