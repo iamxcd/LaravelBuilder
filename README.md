@@ -94,7 +94,7 @@ php artisan lb:CreateDicFile // 将会扫描Models下所有模型中 包含这�
 
 ### 最佳体验
 
-需要配合另一个扩展包，导入增删改查功能。
+需要配合另一个扩展包[iamxcd/laravel-crud](https://github.com/iamxcd/laravel-crud)，导入增删改查功能。
 
 将模板发布后，调整到适合自己的项目。
 
