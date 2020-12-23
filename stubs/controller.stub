@@ -10,6 +10,6 @@ class DummyClass extends Controller
     public function __construct(Model $model)
     {
         $this->model = $model;
-        $this->request = RequestDummy::class;
+        $this->request = app(RequestDummy::class);
     }
 }
