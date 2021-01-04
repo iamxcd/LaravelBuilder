@@ -6,7 +6,7 @@ use File;
 use Illuminate\Console\Command;
 use ReflectionClass;
 
-class CreateDicFile extends Command
+class CreateDicFilCommand extends Command
 {
     /**
      * The name and signature of the console command.
