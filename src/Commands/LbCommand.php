@@ -21,6 +21,7 @@ class LbCommand extends Command
             '已有表生成模型' => 'lb:t2m',
             '控制器' => 'lb:controller',
             '表结构' => 'lb:getColumn',
+            '创建字典文件' => 'lb:CreateDicFile',
         ];
     }
 
