@@ -13,7 +13,7 @@ class CreateDicFilCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:CreateDicFile';
+    protected $signature = 'lb:CreateDicFile';
 
     /**
      * The console command description.
