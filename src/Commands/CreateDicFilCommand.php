@@ -85,7 +85,7 @@ class CreateDicFilCommand extends Command
         foreach ($models as  $class) {
             $dic = $this->getClassDic($class);
             if (count($dic) > 0) {
-                $data[] = $dic;
+                $data[$dic['model']] = $dic['dic'];
             }
         }
 
